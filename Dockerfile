@@ -6,7 +6,7 @@ WORKDIR /usr/ai-inference/
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get -y install git g++ gcc postgresql libpq-dev python-dev wget unzip vim curl \
+    && apt-get -y install git g++ gcc wget unzip vim curl \
     && apt-get -y install poppler-utils ffmpeg \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*

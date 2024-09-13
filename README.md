@@ -26,3 +26,15 @@ curl --location 'http://0.0.0.0:8000/runsync' \
 
 > [!NOTE]
 > I am passing the AWS Creds (refer `src/.env.example`) as secrets. Runpod requires secrets to be prefixed with `RUNPOD_SECRET_`. Refer the [docs](https://docs.runpod.io/pods/templates/secrets) for more information.
+
+### Hosting the model on RunPod
+
+1. Create the docker image
+```bash
+docker build -f Dockerfile -t adimyth/serverless-t2s-ai4bharat:v1.0.0 .
+```
+
+1. Push the docker image to dockerhub
+```bash
+docker push adimyth/serverless-t2s-ai4bharat:v1.0.0
+```
