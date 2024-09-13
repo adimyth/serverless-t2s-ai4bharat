@@ -12,7 +12,6 @@ load_dotenv()
 # Load the models
 models = {}
 for lang in ["hi", "te", "ta", "kn"]:
-    lang = lang.value
     models[lang] = {}
     models[lang]["synthesizer"] = Synthesizer(
         tts_checkpoint=f"models/v1/{lang}/fastpitch/best_model.pth",
@@ -61,7 +60,7 @@ def handler(event):
 
     # Save the waveform as a wav file
     output = io.BytesIO()
-    sf.write(output, waveform, 16000, format="wav")
+    sf.write(output, waveform, 22050, format="wav")
     output.seek(0)
 
     # Upload the file to S3
