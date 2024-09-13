@@ -1,6 +1,8 @@
 runpod==1.6.2
 soundfile==0.12.1
 transformers==4.44.2
-torch==2.4.0
+torch==2.4.1
 boto3==1.35.7
 python-dotenv==1.0.1
+librosa==0.8.0
+numpy==1.22.0
