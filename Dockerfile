@@ -12,8 +12,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Additional requirements for IndicTrans2 - https://github.com/AI4Bharat/IndicTrans2/blob/main/huggingface_interface/colab_inference.ipynb (setup section)
-RUN pip install nltk sacremoses pandas regex mock transformers>=4.33.2 mosestokenizer
-RUN python3 -c "import nltk; nltk.download('punkt')"
+RUN pip install nltk sacremoses pandas regex mock "transformers>=4.33.2" mosestokenizer
+RUN python3.11 -c "import nltk; nltk.download('punkt')"
 RUN pip install bitsandbytes scipy accelerate datasets
 RUN pip install sentencepiece
 
