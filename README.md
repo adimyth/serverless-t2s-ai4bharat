@@ -1,17 +1,44 @@
 ## Deploying Huggingface Models on RunPod
 
-### Running the project
+### Running the project locally
 
 1. Clone the repository
-2. Install the requirements
+2. Create a virtual environment
+```bash
+python3.10 -m venv .venv
+
+source .venv/bin/activate
+```
+3. Install the requirements
 ```bash
 pip install -r builder/requirements.txt
 ```
-3. Run the project. Refer the [docs](https://docs.runpod.io/serverless/workers/development/overview) for more options. This will start the FastAPI server on the specified host at port 8000.
+4. Download a model. We will only be testing with Hindi. You can opt to download other models as well.
+```bash
+mkdir models/
+
+wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/hi.zip && unzip hi.zip -d models/v1 && rm hi.zip
+```
+5. Install `TTS dependencies`
+```bash
+git clone https://github.com/adimyth/TTS 
+cd TTS && python3.10 -m pip install -e .
+```
+6. Install `nltk`
+```bash
+python3.10 -m pip install nltk
+python3.10 -c "import nltk; nltk.download('punkt')"
+```
+7. Modify the `src/handler.py` to only keep hindi model. Remove the other models. from the list. 
+```python
+# for lang in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pn"]:
+for lang in ["hi"]:
+```
+8. Run the project. Refer the [docs](https://docs.runpod.io/serverless/workers/development/overview) for more options. This will start the FastAPI server on the specified host at port 8000.
 ```bash
 python3 src/handler.py --rp_serve_api --rp_api_host 0.0.0.0 --rp_log_level DEBUG
 ```
-4. Test the project
+9. Test the project
 ```bash
 curl --location 'http://0.0.0.0:8000/runsync' \
 --header 'accept: application/json' \

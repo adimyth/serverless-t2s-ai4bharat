@@ -16,7 +16,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install nltk
-RUN pip install nltk
+RUN python3.10 -m pip install nltk
 RUN python3.10 -c "import nltk; nltk.download('punkt')"
 
 # Download Indic-TTS models 
