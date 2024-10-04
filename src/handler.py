@@ -6,14 +6,14 @@ from TTS.utils.synthesizer import Synthesizer
 import runpod
 import boto3
 from dotenv import load_dotenv
+from services.inference import TextToSpeechEngine
 
 load_dotenv()
 
 # Load the models
 models = {}
-for lang in ["hi", "te", "ta", "kn"]:
-    models[lang] = {}
-    models[lang]["synthesizer"] = Synthesizer(
+for lang in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pn"]:
+    models[lang] = Synthesizer(
         tts_checkpoint=f"models/v1/{lang}/fastpitch/best_model.pth",
         tts_config_path=f"models/v1/{lang}/fastpitch/config.json",
         tts_speakers_file=f"models/v1/{lang}/fastpitch/speakers.pth",
@@ -26,6 +26,8 @@ for lang in ["hi", "te", "ta", "kn"]:
     print(f"Synthesizer loaded for {lang}...")
     print("*" * 100)
 print("TTS models loaded successfully")
+
+engine = TextToSpeechEngine(models)
 
 # Initialize S3 client
 s3 = boto3.client(
@@ -49,14 +51,11 @@ def handler(event):
         return {"error": "sentence is required"}
     if not language:
         return {"error": "language is required"}
-    if language not in ["hi", "te", "ta", "kn"]:
-        return {"error": "language not supported"}
-
-    # Get model for the language
-    synthesizer = models[language]["synthesizer"]
+    if language not in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pn"]:
+        return {"error": f"{language} is not a supported language"}
 
     # Perform inference
-    waveform = synthesizer.tts(sentence, speaker_name=gender, style_wav="")
+    waveform = engine.infer_from_text(sentence, lang=language, speaker_name=gender)
 
     # Save the waveform as a wav file
     output = io.BytesIO()

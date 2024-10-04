@@ -15,18 +15,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Additional requirements for IndicTrans2 - https://github.com/AI4Bharat/IndicTrans2/blob/main/huggingface_interface/colab_inference.ipynb (setup section)
-RUN python3.10 -m pip install nltk sacremoses pandas regex mock "transformers>=4.33.2" mosestokenizer
-RUN python3.10 -m nltk.downloader punkt
-RUN python3.10 -m pip install bitsandbytes scipy accelerate datasets
-RUN python3.10 -m pip install sentencepiece
-
-RUN git clone https://github.com/VarunGumma/IndicTransTokenizer
-RUN cd IndicTransTokenizer && python3.10 -m pip install -e .
-
 # Download Indic-TTS models 
 RUN mkdir -p /usr/ai-inference/models/v1
-
 # Hindi
 RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/hi.zip && unzip hi.zip -d /usr/ai-inference/models/v1 && rm hi.zip
 # Kannada
@@ -35,6 +25,16 @@ RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints
 RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/ta.zip && unzip ta.zip -d /usr/ai-inference/models/v1 && rm ta.zip
 # Telugu
 RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/te.zip && unzip te.zip -d /usr/ai-inference/models/v1 && rm te.zip
+# Marathi
+RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/mr.zip && unzip mr.zip -d /usr/ai-inference/models/v1 && rm mr.zip
+# Malayalam
+RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/ml.zip && unzip ml.zip -d /usr/ai-inference/models/v1 && rm ml.zip
+# Bengali
+RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/bn.zip && unzip bn.zip -d /usr/ai-inference/models/v1 && rm bn.zip
+# Gujarati
+RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/gu.zip && unzip gu.zip -d /usr/ai-inference/models/v1 && rm gu.zip
+# Punjabi
+RUN wget https://github.com/AI4Bharat/Indic-TTS/releases/download/v1-checkpoints-release/pa.zip && unzip pa.zip -d /usr/ai-inference/models/v1 && rm pa.zip
 
 # Install TTS dependencies
 RUN git clone https://github.com/adimyth/TTS 
