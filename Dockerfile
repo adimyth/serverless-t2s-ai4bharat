@@ -15,6 +15,10 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install nltk
+RUN pip install nltk
+RUN python3.10 -c "import nltk; nltk.download('punkt')"
+
 # Download Indic-TTS models 
 RUN mkdir -p /usr/ai-inference/models/v1
 # Hindi

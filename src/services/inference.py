@@ -50,7 +50,7 @@ class TextToSpeechEngine:
         self.orig_sr = 22050  # model.output_sample_rate
         self.enable_denoiser = enable_denoiser
         if enable_denoiser:
-            from src.tts.services.postprocessor.denoiser import Denoiser
+            from services.postprocessor.denoiser import Denoiser
 
             self.target_sr = 22050
             self.denoiser = Denoiser(self.orig_sr, self.target_sr)
