@@ -1,5 +1,16 @@
 ## Deploying Huggingface Models on RunPod
 
+### Languages supported
+- Hindi
+- Kannada
+- Tamil
+- Telugu
+- Marathi
+- Malayalam
+- Bengali
+- Gujarati
+- Punjabi
+
 ### Running the project locally
 
 1. Clone the repository
@@ -56,12 +67,12 @@ curl --location 'http://0.0.0.0:8000/runsync' \
 
 ### Hosting the model on RunPod
 
-1. Create the docker image
+Create the docker image
 ```bash
 docker build -f Dockerfile -t adimyth/serverless-t2s-ai4bharat:v1.0.0 .
 ```
 
-1. Push the docker image to dockerhub
+Push the docker image to dockerhub
 ```bash
 docker push adimyth/serverless-t2s-ai4bharat:v1.0.0
 ```
