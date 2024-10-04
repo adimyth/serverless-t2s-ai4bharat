@@ -42,7 +42,7 @@ python3.10 -c "import nltk; nltk.download('punkt')"
 ```
 7. Modify the `src/handler.py` to only keep hindi model. Remove the other models. from the list. 
 ```python
-# for lang in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pn"]:
+# for lang in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pa"]:
 for lang in ["hi"]:
 ```
 8. Run the project. Refer the [docs](https://docs.runpod.io/serverless/workers/development/overview) for more options. This will start the FastAPI server on the specified host at port 8000.

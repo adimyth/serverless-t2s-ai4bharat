@@ -12,7 +12,7 @@ load_dotenv()
 
 # Load the models
 models = {}
-for lang in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pn"]:
+for lang in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pa"]:
     models[lang] = Synthesizer(
         tts_checkpoint=f"models/v1/{lang}/fastpitch/best_model.pth",
         tts_config_path=f"models/v1/{lang}/fastpitch/config.json",
@@ -51,7 +51,7 @@ def handler(event):
         return {"error": "sentence is required"}
     if not language:
         return {"error": "language is required"}
-    if language not in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pn"]:
+    if language not in ["hi", "kn", "ta", "te", "mr", "ml", "bn", "gu", "pa"]:
         return {"error": f"{language} is not a supported language"}
 
     # Perform inference
