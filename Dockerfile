@@ -46,8 +46,8 @@ RUN cd TTS && python3.10 -m pip install -e .
 
 # Install necessary packages
 COPY builder/requirements.txt /requirements.txt
-RUN python3.10 -m pip install --upgrade pip && \
-    python3.10 -m pip install --upgrade -r /requirements.txt --no-cache-dir && \
+RUN python3.10 -m pip install pip==23.2.1 && \
+    python3.10 -m pip install --upgrade -r /requirements.txt --no-cache-dir --ignore-installed && \
     rm /requirements.txt
 
 # Add src files
